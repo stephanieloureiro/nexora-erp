@@ -38,10 +38,10 @@ src/main/resources/application-prod.properties
 5. Confirme a criacao dos recursos definidos no `render.yaml`.
 6. Aguarde o build e o deploy.
 
-Ao final, o Render mostrara uma URL publica parecida com:
+Deploy publicado:
 
 ```text
-https://nexora-erp.onrender.com
+https://nexora-erp-kass.onrender.com/
 ```
 
 ## Como validar
@@ -49,8 +49,8 @@ https://nexora-erp.onrender.com
 Depois do deploy, abra:
 
 ```text
-https://URL_DO_RENDER/
-https://URL_DO_RENDER/swagger-ui.html
+https://nexora-erp-kass.onrender.com/
+https://nexora-erp-kass.onrender.com/swagger-ui.html
 ```
 
 Login de demonstracao:

@@ -8,7 +8,7 @@ O projeto foi desenvolvido como portfolio para demonstrar fundamentos valorizado
 
 **Fase atual: Fase 13 - Preparacao para deploy real**
 
-Status: sistema com back-end finalizado para portfolio, interface web operacional, pagina publica no GitHub Pages e configuracao de deploy real preparada para Render.
+Status: sistema com back-end finalizado para portfolio, interface web operacional, pagina publica no GitHub Pages e deploy real ativo no Render.
 
 Resultado atual dos testes:
 
@@ -172,6 +172,20 @@ A interface web usa o login:
 
 ```text
 admin@nexora.com / nexora123
+```
+
+### Deploy em producao
+
+Aplicacao online no Render:
+
+```text
+https://nexora-erp-kass.onrender.com/
+```
+
+Swagger em producao:
+
+```text
+https://nexora-erp-kass.onrender.com/swagger-ui.html
 ```
 
 ### Banco de desenvolvimento
@@ -504,7 +518,7 @@ Itens concluidos:
 
 ### Fase 13 - Preparacao para deploy real
 
-Status: em validacao.
+Status: concluida.
 
 Itens concluidos:
 
@@ -515,6 +529,8 @@ Itens concluidos:
 - `Dockerfile` criado com Maven + Eclipse Temurin 21 para build e Eclipse Temurin 21 JRE para execucao.
 - Chave JWT de producao configurada para ser gerada fora do codigo.
 - Guia de deploy no Render criado.
+- Deploy publicado em `https://nexora-erp-kass.onrender.com/`.
+- Login de producao validado com sucesso.
 
 ## Observacoes tecnicas
 
@@ -527,4 +543,5 @@ Itens concluidos:
 - A interface web inicial foi adicionada ao proprio Spring Boot para demonstracao e uso basico do sistema.
 - A pagina do GitHub Pages e uma vitrine estatica do projeto.
 - O deploy real do ERP precisa de uma plataforma que rode Java e PostgreSQL, como Render, Railway, Fly.io ou VPS.
+- O deploy real atual esta ativo no Render.
 - Um front-end separado continua como evolucao futura para uma experiencia visual maior e mais escalavel.
