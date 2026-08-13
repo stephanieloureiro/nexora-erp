@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nexora ERP | Portfolio</title>
+    <meta name="description" content="Nexora ERP, sistema de gestao comercial em Java, Spring Boot, JWT, relatórios, auditoria e interface web inicial.">
+    <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+<header class="hero">
+    <nav class="nav">
+        <strong>Nexora ERP</strong>
+        <div>
+            <a href="https://github.com/stephanieloureiro/nexora-erp">GitHub</a>
+            <a href="#executar">Executar</a>
+        </div>
+    </nav>
+
+    <section class="hero-grid">
+        <div>
+            <p class="eyebrow">Portfolio back-end Java</p>
+            <h1>Nexora ERP</h1>
+            <p class="lead">
+                Sistema de gestao comercial para clientes, produtos, estoque, pedidos de venda,
+                autenticacao, relatorios gerenciais e auditoria.
+            </p>
+            <div class="actions">
+                <a class="button" href="https://github.com/stephanieloureiro/nexora-erp">Ver repositorio</a>
+                <a class="button secondary" href="#modulos">Ver modulos</a>
+            </div>
+        </div>
+
+        <div class="preview" aria-label="Resumo visual do sistema">
+            <div class="preview-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="metrics">
+                <article>
+                    <span>Testes</span>
+                    <strong>40</strong>
+                </article>
+                <article>
+                    <span>Falhas</span>
+                    <strong>0</strong>
+                </article>
+                <article>
+                    <span>Java</span>
+                    <strong>21</strong>
+                </article>
+            </div>
+            <div class="rows">
+                <p><span>Clientes</span><b>Cadastro e pesquisa</b></p>
+                <p><span>Estoque</span><b>Entrada e saida</b></p>
+                <p><span>Pedidos</span><b>Confirmacao com baixa</b></p>
+                <p><span>Auditoria</span><b>Eventos administrativos</b></p>
+            </div>
+        </div>
+    </section>
+</header>
+
+<main>
+    <section class="section" id="modulos">
+        <div class="section-title">
+            <p class="eyebrow">Escopo entregue</p>
+            <h2>Modulos principais</h2>
+        </div>
+        <div class="cards">
+            <article>
+                <h3>Clientes</h3>
+                <p>Cadastro, atualizacao, pesquisa, validacao de documento e inativacao logica.</p>
+            </article>
+            <article>
+                <h3>Produtos</h3>
+                <p>SKU unico, preco com BigDecimal, controle de estoque minimo e status ativo.</p>
+            </article>
+            <article>
+                <h3>Estoque</h3>
+                <p>Movimentacoes de entrada e saida com regras para bloquear saldo insuficiente.</p>
+            </article>
+            <article>
+                <h3>Pedidos</h3>
+                <p>Criacao, confirmacao, cancelamento, calculo de totais e integracao com estoque.</p>
+            </article>
+            <article>
+                <h3>Seguranca</h3>
+                <p>Login JWT, usuarios internos, BCrypt e permissoes para ADMIN e EMPLOYEE.</p>
+            </article>
+            <article>
+                <h3>Relatorios e auditoria</h3>
+                <p>Resumo de vendas, ranking de produtos, indicadores de estoque e eventos auditaveis.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section split">
+        <div>
+            <p class="eyebrow">Arquitetura</p>
+            <h2>Back-end estruturado para portfolio profissional</h2>
+            <p>
+                O projeto usa arquitetura em camadas com controllers, services, repositories,
+                entidades, DTOs, mappers, excecoes centralizadas e migracoes Flyway.
+            </p>
+        </div>
+        <ul class="stack">
+            <li>Java 21</li>
+            <li>Spring Boot 4.1</li>
+            <li>Spring Data JPA</li>
+            <li>PostgreSQL e H2</li>
+            <li>Flyway</li>
+            <li>Spring Security e JWT</li>
+            <li>OpenAPI e Swagger</li>
+            <li>GitHub Actions</li>
+        </ul>
+    </section>
+
+    <section class="section" id="executar">
+        <div class="section-title">
+            <p class="eyebrow">Como usar</p>
+            <h2>Executar o sistema completo</h2>
+        </div>
+        <div class="run">
+            <pre><code>git clone https://github.com/stephanieloureiro/nexora-erp.git
+cd nexora-erp
+.\mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=local</code></pre>
+            <p>
+                Depois acesse <strong>http://localhost:8080/</strong> e entre com
+                <strong>admin@nexora.com</strong> / <strong>nexora123</strong>.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <span>Nexora ERP</span>
+    <a href="https://github.com/stephanieloureiro/nexora-erp">github.com/stephanieloureiro/nexora-erp</a>
+</footer>
+</body>
+</html>

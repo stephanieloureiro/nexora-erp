@@ -6,9 +6,9 @@ O projeto foi desenvolvido como portfolio para demonstrar fundamentos valorizado
 
 ## Status do projeto
 
-**Fase atual: Fase 11 - Interface web inicial**
+**Fase atual: Fase 12 - Publicacao no GitHub Pages**
 
-Status: sistema com back-end finalizado para portfolio e primeira interface web operacional.
+Status: sistema com back-end finalizado para portfolio, interface web operacional e pagina publica de apresentacao preparada para GitHub Pages.
 
 Resultado atual dos testes:
 
@@ -243,6 +243,7 @@ http://localhost:8080/v3/api-docs
 
 Documentos complementares:
 
+- [Pagina publica do portfolio](docs/index.html)
 - [Exemplos de requisicoes](docs/api-examples.md)
 - [Diagrama de entidades](docs/entity-diagram.md)
 - [Guia de portfolio e entrevista](docs/portfolio-guide.md)
@@ -471,7 +472,7 @@ Itens concluidos:
 
 ### Fase 11 - Interface web inicial
 
-Status: em validacao.
+Status: concluida.
 
 Itens concluidos:
 
@@ -488,6 +489,17 @@ Itens concluidos:
 - Dependencias runtime do Spring Security declaradas explicitamente para execucao local.
 - DevTools removido para evitar reinicios automaticos instaveis na demonstracao local.
 
+### Fase 12 - Publicacao no GitHub Pages
+
+Status: em validacao.
+
+Itens concluidos:
+
+- Pagina estatica de portfolio criada em `docs/index.html`.
+- Estilos da pagina publica criados em `docs/pages.css`.
+- README atualizado para registrar a fase de publicacao.
+- GitHub Pages usado apenas para apresentacao publica, pois o Pages nao executa servidor Spring Boot nem banco de dados.
+
 ## Observacoes tecnicas
 
 - O projeto foi preparado para Git local e GitHub Actions.
@@ -497,4 +509,5 @@ Itens concluidos:
 - Neste ambiente, o Docker ainda precisa estar instalado para validar o `docker-compose.yml` em execucao.
 - O back-end esta finalizado para portfolio.
 - A interface web inicial foi adicionada ao proprio Spring Boot para demonstracao e uso basico do sistema.
+- A pagina do GitHub Pages e uma vitrine estatica do projeto.
 - Um front-end separado continua como evolucao futura para uma experiencia visual maior e mais escalavel.
