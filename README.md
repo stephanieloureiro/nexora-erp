@@ -13,7 +13,7 @@ Status: MVP implementado, testado, documentado e com inicio dos diferenciais tec
 Resultado atual dos testes:
 
 ```text
-33 testes executados
+36 testes executados
 0 falhas
 ```
 
@@ -243,6 +243,7 @@ Documentos complementares:
 - [PostgreSQL com Docker](docs/docker-postgres.md)
 - [Git, GitHub e CI](docs/git-github-ci.md)
 - [Autenticacao e autorizacao](docs/authentication.md)
+- [Relatorios gerenciais](docs/reports.md)
 
 ## Endpoints principais
 
@@ -298,6 +299,14 @@ Usuarios iniciais:
 ```text
 admin@nexora.com / nexora123
 operador@nexora.com / nexora123
+```
+
+### Relatorios
+
+```text
+GET    /api/reports/sales-summary
+GET    /api/reports/top-products
+GET    /api/reports/stock-summary
 ```
 
 ## Regras de negocio importantes
@@ -404,6 +413,20 @@ Itens concluidos:
 - Testes de clientes, produtos, estoque e pedidos atualizados para executar com usuario autenticado.
 - Guia de autenticacao criado.
 
+### Fase 8 - Relatorios gerenciais
+
+Status: concluida.
+
+Itens concluidos:
+
+- Resumo de vendas criado.
+- Ranking de produtos mais vendidos criado.
+- Resumo de estoque criado.
+- Consultas agregadas adicionadas aos reposititorios.
+- Endpoints protegidos por autenticacao.
+- Testes de integracao criados para os relatorios.
+- Guia de relatorios criado.
+
 ## Observacoes tecnicas
 
 - O projeto foi preparado para Git local e GitHub Actions.
@@ -411,4 +434,4 @@ Itens concluidos:
 - O profile `local` permite demonstrar a aplicacao com H2 em memoria.
 - O aviso conhecido do Mockito sobre carregamento dinamico de agente nao impacta os testes atuais.
 - Neste ambiente, o Docker ainda precisa estar instalado para validar o `docker-compose.yml` em execucao.
-- Auditoria, relatorios e front-end continuam como proximos diferenciais possiveis.
+- Auditoria e front-end continuam como proximos diferenciais possiveis.
