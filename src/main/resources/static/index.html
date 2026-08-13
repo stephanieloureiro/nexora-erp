@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nexora ERP</title>
+    <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<main class="shell">
+    <section class="login-panel" id="loginPanel">
+        <div>
+            <p class="eyebrow">Nexora ERP</p>
+            <h1>Entrar no sistema</h1>
+            <p class="muted">Use o usuario de demonstracao para acessar o painel operacional.</p>
+        </div>
+        <form id="loginForm" class="form-grid">
+            <label>
+                E-mail
+                <input name="email" type="email" value="admin@nexora.com" autocomplete="username" required>
+            </label>
+            <label>
+                Senha
+                <input name="password" type="password" value="nexora123" autocomplete="current-password" required>
+            </label>
+            <button type="submit">Entrar</button>
+            <p class="message" id="loginMessage"></p>
+        </form>
+    </section>
+
+    <section class="app-panel hidden" id="appPanel">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Nexora ERP</p>
+                <h1>Painel operacional</h1>
+            </div>
+            <div class="topbar-actions">
+                <a href="/swagger-ui.html" target="_blank" rel="noreferrer">Swagger</a>
+                <button type="button" id="refreshButton">Atualizar</button>
+                <button type="button" class="ghost" id="logoutButton">Sair</button>
+            </div>
+        </header>
+
+        <nav class="tabs" aria-label="Modulos">
+            <button type="button" class="active" data-tab="dashboard">Painel</button>
+            <button type="button" data-tab="customers">Clientes</button>
+            <button type="button" data-tab="products">Produtos</button>
+            <button type="button" data-tab="stock">Estoque</button>
+            <button type="button" data-tab="orders">Pedidos</button>
+            <button type="button" data-tab="audit">Auditoria</button>
+        </nav>
+
+        <p class="message" id="globalMessage"></p>
+
+        <section class="tab-view active" id="dashboard">
+            <div class="metrics">
+                <article>
+                    <span>Pedidos confirmados</span>
+                    <strong id="confirmedOrders">0</strong>
+                </article>
+                <article>
+                    <span>Receita confirmada</span>
+                    <strong id="confirmedRevenue">R$ 0,00</strong>
+                </article>
+                <article>
+                    <span>Produtos ativos</span>
+                    <strong id="activeProducts">0</strong>
+                </article>
+                <article>
+                    <span>Estoque baixo</span>
+                    <strong id="lowStockProducts">0</strong>
+                </article>
+            </div>
+            <div class="table-panel">
+                <div class="panel-title">
+                    <h2>Produtos mais vendidos</h2>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>SKU</th>
+                        <th>Qtd.</th>
+                        <th>Receita</th>
+                    </tr>
+                    </thead>
+                    <tbody id="topProductsTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="tab-view" id="customers">
+            <div class="work-grid">
+                <form id="customerForm" class="card form-grid">
+                    <h2>Novo cliente</h2>
+                    <label>Nome<input name="name" required maxlength="120"></label>
+                    <label>CPF/CNPJ<input name="document" required maxlength="20"></label>
+                    <label>E-mail<input name="email" type="email" required maxlength="150"></label>
+                    <label>Telefone<input name="phone" maxlength="30"></label>
+                    <button type="submit">Cadastrar cliente</button>
+                </form>
+                <div class="table-panel">
+                    <div class="panel-title">
+                        <h2>Clientes</h2>
+                    </div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody id="customersTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-view" id="products">
+            <div class="work-grid">
+                <form id="productForm" class="card form-grid">
+                    <h2>Novo produto</h2>
+                    <label>Nome<input name="name" required maxlength="120"></label>
+                    <label>SKU<input name="sku" required maxlength="60"></label>
+                    <label>Preco<input name="price" type="number" min="0.01" step="0.01" required></label>
+                    <label>Estoque inicial<input name="stockQuantity" type="number" min="0" step="1" required></label>
+                    <label>Estoque minimo<input name="minimumStock" type="number" min="0" step="1" required></label>
+                    <label>Descricao<textarea name="description" maxlength="500"></textarea></label>
+                    <button type="submit">Cadastrar produto</button>
+                </form>
+                <div class="table-panel">
+                    <div class="panel-title">
+                        <h2>Produtos</h2>
+                    </div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Produto</th>
+                            <th>SKU</th>
+                            <th>Preco</th>
+                            <th>Estoque</th>
+                        </tr>
+                        </thead>
+                        <tbody id="productsTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-view" id="stock">
+            <div class="work-grid">
+                <form id="stockForm" class="card form-grid">
+                    <h2>Movimentar estoque</h2>
+                    <label>ID do produto<input name="productId" type="number" min="1" step="1" required></label>
+                    <label>Tipo
+                        <select name="type" required>
+                            <option value="INBOUND">Entrada</option>
+                            <option value="OUTBOUND">Saida</option>
+                        </select>
+                    </label>
+                    <label>Quantidade<input name="quantity" type="number" min="1" step="1" required></label>
+                    <label>Motivo<input name="reason" required maxlength="255"></label>
+                    <button type="submit">Registrar movimento</button>
+                </form>
+                <div class="table-panel">
+                    <div class="panel-title">
+                        <h2>Ultimas movimentacoes</h2>
+                    </div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Tipo</th>
+                            <th>Qtd.</th>
+                            <th>Motivo</th>
+                        </tr>
+                        </thead>
+                        <tbody id="stockTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-view" id="orders">
+            <div class="work-grid">
+                <form id="orderForm" class="card form-grid">
+                    <h2>Novo pedido</h2>
+                    <label>ID do cliente<input name="customerId" type="number" min="1" step="1" required></label>
+                    <label>ID do produto<input name="productId" type="number" min="1" step="1" required></label>
+                    <label>Quantidade<input name="quantity" type="number" min="1" step="1" required></label>
+                    <button type="submit">Criar pedido</button>
+                </form>
+                <div class="table-panel">
+                    <div class="panel-title">
+                        <h2>Pedidos</h2>
+                    </div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>Acao</th>
+                        </tr>
+                        </thead>
+                        <tbody id="ordersTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-view" id="audit">
+            <div class="table-panel">
+                <div class="panel-title">
+                    <h2>Eventos de auditoria</h2>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Quando</th>
+                        <th>Usuario</th>
+                        <th>Acao</th>
+                        <th>Entidade</th>
+                        <th>Descricao</th>
+                    </tr>
+                    </thead>
+                    <tbody id="auditTable"></tbody>
+                </table>
+            </div>
+        </section>
+    </section>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>

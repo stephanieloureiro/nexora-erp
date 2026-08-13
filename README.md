@@ -6,9 +6,9 @@ O projeto foi desenvolvido como portfolio para demonstrar fundamentos valorizado
 
 ## Status do projeto
 
-**Fase atual: Fase 10 - Finalizacao e handoff**
+**Fase atual: Fase 11 - Interface web inicial**
 
-Status: API back-end finalizada para portfolio, com MVP, diferenciais tecnicos, testes e documentacao.
+Status: sistema com back-end finalizado para portfolio e primeira interface web operacional.
 
 Resultado atual dos testes:
 
@@ -163,8 +163,15 @@ Ele usa H2 em memoria e recria o banco sempre que a aplicacao inicia.
 Depois acesse:
 
 ```text
+http://localhost:8080/
 http://localhost:8080/swagger-ui.html
 http://localhost:8080/v3/api-docs
+```
+
+A interface web usa o login:
+
+```text
+admin@nexora.com / nexora123
 ```
 
 ### Banco de desenvolvimento
@@ -246,6 +253,7 @@ Documentos complementares:
 - [Relatorios gerenciais](docs/reports.md)
 - [Auditoria](docs/audit.md)
 - [Roteiro de demonstracao](docs/demo-script.md)
+- [Guia da interface web](docs/ui-guide.md)
 
 ## Endpoints principais
 
@@ -461,6 +469,23 @@ Itens concluidos:
 - Historico de commits organizado por marcos.
 - Validacao final com testes automatizados.
 
+### Fase 11 - Interface web inicial
+
+Status: em validacao.
+
+Itens concluidos:
+
+- Tela inicial publicada em `http://localhost:8080/`.
+- Login visual integrado ao endpoint JWT.
+- Painel com indicadores de vendas e estoque.
+- Listagem e cadastro de clientes.
+- Listagem e cadastro de produtos.
+- Registro de movimentacoes de estoque.
+- Criacao e confirmacao de pedidos de venda.
+- Consulta de auditoria para usuario administrador.
+- Teste de exposicao publica da interface criado.
+- Guia da interface web criado.
+
 ## Observacoes tecnicas
 
 - O projeto foi preparado para Git local e GitHub Actions.
@@ -469,4 +494,5 @@ Itens concluidos:
 - O aviso conhecido do Mockito sobre carregamento dinamico de agente nao impacta os testes atuais.
 - Neste ambiente, o Docker ainda precisa estar instalado para validar o `docker-compose.yml` em execucao.
 - O back-end esta finalizado para portfolio.
-- Front-end continua como evolucao futura, caso o objetivo seja transformar a API em uma aplicacao visual completa.
+- A interface web inicial foi adicionada ao proprio Spring Boot para demonstracao e uso basico do sistema.
+- Um front-end separado continua como evolucao futura para uma experiencia visual maior e mais escalavel.
