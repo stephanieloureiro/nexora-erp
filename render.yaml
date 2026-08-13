@@ -11,10 +11,18 @@ services:
         value: prod
       - key: NEXORA_JWT_SECRET
         generateValue: true
-      - key: DATABASE_URL
+      - key: DATABASE_HOST
         fromDatabase:
           name: nexora-erp-db
-          property: connectionString
+          property: host
+      - key: DATABASE_PORT
+        fromDatabase:
+          name: nexora-erp-db
+          property: port
+      - key: DATABASE_NAME
+        fromDatabase:
+          name: nexora-erp-db
+          property: database
       - key: DATABASE_USER
         fromDatabase:
           name: nexora-erp-db

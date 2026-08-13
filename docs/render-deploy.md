@@ -17,7 +17,7 @@ render.yaml
 - Um Web Service Docker chamado `nexora-erp`, executando Java 21.
 - Um banco PostgreSQL chamado `nexora-erp-db`.
 - Variaveis de ambiente para conexao com o banco.
-- `DATABASE_URL` apontando para a connection string interna do PostgreSQL.
+- Variaveis separadas para host, porta, banco, usuario e senha do PostgreSQL.
 - Uma chave JWT gerada automaticamente.
 - Profile `prod` do Spring Boot.
 
@@ -69,3 +69,4 @@ admin@nexora.com / nexora123
 - Bancos PostgreSQL gratuitos no Render expiram apos 30 dias; para manter os dados, use um plano pago.
 - O Render Blueprint atual nao aceita `runtime: java`; por isso o deploy usa `runtime: docker`.
 - O build Docker usa imagem Maven com Eclipse Temurin 21 e a execucao usa Eclipse Temurin 21 JRE.
+- A URL JDBC e montada no Spring com `DATABASE_HOST`, `DATABASE_PORT` e `DATABASE_NAME`; usuario e senha ficam em variaveis separadas para evitar formato invalido no driver PostgreSQL.
