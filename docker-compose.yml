@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: nexora-erp-postgres
+    environment:
+      POSTGRES_DB: nexora_erp
+      POSTGRES_USER: nexora
+      POSTGRES_PASSWORD: nexora
+    ports:
+      - "5432:5432"
+    volumes:
+      - nexora_erp_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nexora -d nexora_erp"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  nexora_erp_postgres_data:

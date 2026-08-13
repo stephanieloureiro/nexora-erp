@@ -1,0 +1,2 @@
+-- Baseline inicial do banco de dados.
+-- As tabelas de negocio serao criadas incrementalmente a partir do modulo de clientes.
