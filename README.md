@@ -486,6 +486,7 @@ Itens concluidos:
 - Teste de exposicao publica da interface criado.
 - Guia da interface web criado.
 - Dependencias runtime do Spring Security declaradas explicitamente para execucao local.
+- DevTools removido para evitar reinicios automaticos instaveis na demonstracao local.
 
 ## Observacoes tecnicas
 
