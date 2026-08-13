@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.nexora.erp.support.SecurityMockMvc.employee;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -59,6 +60,7 @@ class SalesOrderControllerIntegrationTest {
         Product product = saveProduct("ORDER-001", new BigDecimal("50.00"), 10);
 
         mockMvc.perform(post("/api/sales-orders")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -85,7 +87,8 @@ class SalesOrderControllerIntegrationTest {
         Product product = saveProduct("ORDER-002", new BigDecimal("40.00"), 10);
         String location = createOrder(customer.getId(), product.getId(), 4);
 
-        mockMvc.perform(patch(location + "/confirm"))
+        mockMvc.perform(patch(location + "/confirm")
+                        .with(employee()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CONFIRMADO"));
 
@@ -100,7 +103,8 @@ class SalesOrderControllerIntegrationTest {
         Product product = saveProduct("ORDER-003", new BigDecimal("40.00"), 2);
         String location = createOrder(customer.getId(), product.getId(), 4);
 
-        mockMvc.perform(patch(location + "/confirm"))
+        mockMvc.perform(patch(location + "/confirm")
+                        .with(employee()))
                 .andExpect(status().isUnprocessableContent())
                 .andExpect(jsonPath("$.message").value("Nao ha estoque suficiente para realizar a saida."));
 
@@ -115,10 +119,12 @@ class SalesOrderControllerIntegrationTest {
         Product product = saveProduct("ORDER-004", new BigDecimal("25.00"), 10);
         String location = createOrder(customer.getId(), product.getId(), 4);
 
-        mockMvc.perform(patch(location + "/confirm"))
+        mockMvc.perform(patch(location + "/confirm")
+                        .with(employee()))
                 .andExpect(status().isOk());
 
-        mockMvc.perform(patch(location + "/cancel"))
+        mockMvc.perform(patch(location + "/cancel")
+                        .with(employee()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CANCELADO"));
 
@@ -133,10 +139,12 @@ class SalesOrderControllerIntegrationTest {
         Product product = saveProduct("ORDER-005", new BigDecimal("30.00"), 10);
         String location = createOrder(customer.getId(), product.getId(), 1);
 
-        mockMvc.perform(patch(location + "/cancel"))
+        mockMvc.perform(patch(location + "/cancel")
+                        .with(employee()))
                 .andExpect(status().isOk());
 
-        mockMvc.perform(patch(location + "/confirm"))
+        mockMvc.perform(patch(location + "/confirm")
+                        .with(employee()))
                 .andExpect(status().isUnprocessableContent())
                 .andExpect(jsonPath("$.message").value("Pedido cancelado nao pode ser confirmado."));
     }
@@ -149,6 +157,7 @@ class SalesOrderControllerIntegrationTest {
         Product product = saveProduct("ORDER-006", new BigDecimal("30.00"), 10);
 
         mockMvc.perform(post("/api/sales-orders")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -173,6 +182,7 @@ class SalesOrderControllerIntegrationTest {
         productRepository.save(product);
 
         mockMvc.perform(post("/api/sales-orders")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -194,6 +204,7 @@ class SalesOrderControllerIntegrationTest {
         Customer customer = saveCustomer();
 
         mockMvc.perform(post("/api/sales-orders")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -207,6 +218,7 @@ class SalesOrderControllerIntegrationTest {
 
     private String createOrder(Long customerId, Long productId, Integer quantity) throws Exception {
         return mockMvc.perform(post("/api/sales-orders")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {

@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static com.nexora.erp.support.SecurityMockMvc.admin;
+import static com.nexora.erp.support.SecurityMockMvc.employee;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
@@ -37,6 +39,7 @@ class CustomerControllerIntegrationTest {
     @Test
     void shouldCreateCustomer() throws Exception {
         mockMvc.perform(post("/api/customers")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -65,11 +68,13 @@ class CustomerControllerIntegrationTest {
                 """;
 
         mockMvc.perform(post("/api/customers")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isCreated());
 
         mockMvc.perform(post("/api/customers")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isConflict())
@@ -79,6 +84,7 @@ class CustomerControllerIntegrationTest {
     @Test
     void shouldReturnBadRequestWhenEmailIsInvalid() throws Exception {
         mockMvc.perform(post("/api/customers")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -95,6 +101,7 @@ class CustomerControllerIntegrationTest {
     @Test
     void shouldFindCustomerById() throws Exception {
         String location = mockMvc.perform(post("/api/customers")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -109,7 +116,8 @@ class CustomerControllerIntegrationTest {
                 .getResponse()
                 .getHeader("Location");
 
-        mockMvc.perform(get(location))
+        mockMvc.perform(get(location)
+                        .with(employee()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Maria Souza"));
     }
@@ -117,6 +125,7 @@ class CustomerControllerIntegrationTest {
     @Test
     void shouldDeactivateCustomer() throws Exception {
         String location = mockMvc.perform(post("/api/customers")
+                        .with(admin())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -131,7 +140,8 @@ class CustomerControllerIntegrationTest {
                 .getResponse()
                 .getHeader("Location");
 
-        mockMvc.perform(patch(location + "/deactivate"))
+        mockMvc.perform(patch(location + "/deactivate")
+                        .with(admin()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.active").value(false));
     }

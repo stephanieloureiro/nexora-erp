@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static com.nexora.erp.support.SecurityMockMvc.admin;
+import static com.nexora.erp.support.SecurityMockMvc.employee;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
@@ -37,6 +39,7 @@ class ProductControllerIntegrationTest {
     @Test
     void shouldCreateProduct() throws Exception {
         mockMvc.perform(post("/api/products")
+                        .with(admin())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -70,11 +73,13 @@ class ProductControllerIntegrationTest {
                 """;
 
         mockMvc.perform(post("/api/products")
+                        .with(admin())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isCreated());
 
         mockMvc.perform(post("/api/products")
+                        .with(admin())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isConflict())
@@ -84,6 +89,7 @@ class ProductControllerIntegrationTest {
     @Test
     void shouldReturnBadRequestWhenPriceIsInvalid() throws Exception {
         mockMvc.perform(post("/api/products")
+                        .with(admin())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -102,6 +108,7 @@ class ProductControllerIntegrationTest {
     @Test
     void shouldFindLowStockProducts() throws Exception {
         mockMvc.perform(post("/api/products")
+                        .with(admin())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -115,7 +122,8 @@ class ProductControllerIntegrationTest {
                                 """))
                 .andExpect(status().isCreated());
 
-        mockMvc.perform(get("/api/products/low-stock"))
+        mockMvc.perform(get("/api/products/low-stock")
+                        .with(employee()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].sku").value("TEC-001"))
                 .andExpect(jsonPath("$.content[0].lowStock").value(true));
@@ -124,6 +132,7 @@ class ProductControllerIntegrationTest {
     @Test
     void shouldDeactivateProduct() throws Exception {
         String location = mockMvc.perform(post("/api/products")
+                        .with(admin())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -140,7 +149,8 @@ class ProductControllerIntegrationTest {
                 .getResponse()
                 .getHeader("Location");
 
-        mockMvc.perform(patch(location + "/deactivate"))
+        mockMvc.perform(patch(location + "/deactivate")
+                        .with(admin()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.active").value(false));
     }

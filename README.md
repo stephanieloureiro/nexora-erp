@@ -13,7 +13,7 @@ Status: MVP implementado, testado, documentado e com inicio dos diferenciais tec
 Resultado atual dos testes:
 
 ```text
-29 testes executados
+33 testes executados
 0 falhas
 ```
 
@@ -78,6 +78,8 @@ Resultado atual dos testes:
 - Mockito
 - H2 para testes
 - Springdoc OpenAPI
+- Spring Security
+- JWT
 
 ## Arquitetura
 
@@ -240,6 +242,7 @@ Documentos complementares:
 - [Roadmap da Fase 6](docs/phase-6-roadmap.md)
 - [PostgreSQL com Docker](docs/docker-postgres.md)
 - [Git, GitHub e CI](docs/git-github-ci.md)
+- [Autenticacao e autorizacao](docs/authentication.md)
 
 ## Endpoints principais
 
@@ -282,6 +285,19 @@ GET    /api/sales-orders/{id}
 GET    /api/sales-orders
 PATCH  /api/sales-orders/{id}/confirm
 PATCH  /api/sales-orders/{id}/cancel
+```
+
+### Autenticacao
+
+```text
+POST   /api/auth/login
+```
+
+Usuarios iniciais:
+
+```text
+admin@nexora.com / nexora123
+operador@nexora.com / nexora123
 ```
 
 ## Regras de negocio importantes
@@ -354,7 +370,7 @@ Itens concluidos:
 
 ### Fase 6 - Diferenciais
 
-Status: iniciada.
+Status: concluida.
 
 Decisao da etapa atual:
 
@@ -372,6 +388,22 @@ Itens concluidos nesta fase:
 - Guia de publicacao no GitHub e CI criado.
 - README atualizado com a fase atual e instrucoes de continuidade.
 
+### Fase 7 - Seguranca
+
+Status: concluida.
+
+Itens concluidos:
+
+- Spring Security adicionado.
+- Autenticacao por JWT implementada.
+- Usuarios internos com perfis `ADMIN` e `EMPLOYEE` criados.
+- Senhas protegidas com BCrypt.
+- Endpoints de negocio protegidos.
+- Swagger e login mantidos publicos para facilitar demonstracao.
+- Testes de login, bloqueio sem token e bloqueio por permissao criados.
+- Testes de clientes, produtos, estoque e pedidos atualizados para executar com usuario autenticado.
+- Guia de autenticacao criado.
+
 ## Observacoes tecnicas
 
 - O projeto foi preparado para Git local e GitHub Actions.
@@ -379,4 +411,4 @@ Itens concluidos nesta fase:
 - O profile `local` permite demonstrar a aplicacao com H2 em memoria.
 - O aviso conhecido do Mockito sobre carregamento dinamico de agente nao impacta os testes atuais.
 - Neste ambiente, o Docker ainda precisa estar instalado para validar o `docker-compose.yml` em execucao.
-- Spring Security, JWT, auditoria e relatorios continuam como proximos diferenciais possiveis.
+- Auditoria, relatorios e front-end continuam como proximos diferenciais possiveis.

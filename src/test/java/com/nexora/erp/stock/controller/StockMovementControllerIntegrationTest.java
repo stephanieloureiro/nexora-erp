@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.nexora.erp.support.SecurityMockMvc.employee;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -47,6 +48,7 @@ class StockMovementControllerIntegrationTest {
         Product product = saveProduct(10);
 
         mockMvc.perform(post("/api/stock-movements")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -70,6 +72,7 @@ class StockMovementControllerIntegrationTest {
         Product product = saveProduct(10);
 
         mockMvc.perform(post("/api/stock-movements")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -92,6 +95,7 @@ class StockMovementControllerIntegrationTest {
         Product product = saveProduct(3);
 
         mockMvc.perform(post("/api/stock-movements")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -114,6 +118,7 @@ class StockMovementControllerIntegrationTest {
         Product product = saveProduct(10);
 
         mockMvc.perform(post("/api/stock-movements")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -132,6 +137,7 @@ class StockMovementControllerIntegrationTest {
         Product product = saveProduct(10);
 
         mockMvc.perform(post("/api/stock-movements")
+                        .with(employee())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -143,7 +149,8 @@ class StockMovementControllerIntegrationTest {
                                 """.formatted(product.getId())))
                 .andExpect(status().isCreated());
 
-        mockMvc.perform(get("/api/products/" + product.getId() + "/stock-movements"))
+        mockMvc.perform(get("/api/products/" + product.getId() + "/stock-movements")
+                        .with(employee()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].productId").value(product.getId()))
                 .andExpect(jsonPath("$.content[0].type").value("ENTRADA"));
