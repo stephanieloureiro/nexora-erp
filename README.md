@@ -511,7 +511,8 @@ Itens concluidos:
 - Profile `prod` criado para execucao em servidor publico.
 - Porta configurada por variavel de ambiente `PORT`.
 - PostgreSQL externo configurado por `DATABASE_URL`, usuario e senha via variaveis de ambiente.
-- Blueprint `render.yaml` criado para Web Service Java e PostgreSQL.
+- Blueprint `render.yaml` criado para Web Service Docker com Java 21 e PostgreSQL.
+- `Dockerfile` criado para build e execucao do Spring Boot no Render.
 - Chave JWT de producao configurada para ser gerada fora do codigo.
 - Guia de deploy no Render criado.
 

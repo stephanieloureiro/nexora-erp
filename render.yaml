@@ -1,10 +1,11 @@
 services:
   - type: web
     name: nexora-erp
-    runtime: java
+    runtime: docker
     plan: free
-    buildCommand: ./mvnw clean package -DskipTests
-    startCommand: java -jar target/nexora-erp-0.0.1-SNAPSHOT.jar
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
