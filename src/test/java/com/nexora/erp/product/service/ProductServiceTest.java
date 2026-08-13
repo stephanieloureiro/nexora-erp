@@ -1,5 +1,6 @@
 package com.nexora.erp.product.service;
 
+import com.nexora.erp.audit.service.AuditService;
 import com.nexora.erp.common.exception.DuplicateResourceException;
 import com.nexora.erp.product.dto.ProductCreateRequest;
 import com.nexora.erp.product.dto.ProductResponse;
@@ -23,7 +24,8 @@ class ProductServiceTest {
 
     private final ProductRepository productRepository = mock(ProductRepository.class);
     private final ProductMapper productMapper = new ProductMapper();
-    private final ProductService productService = new ProductService(productRepository, productMapper);
+    private final AuditService auditService = mock(AuditService.class);
+    private final ProductService productService = new ProductService(productRepository, productMapper, auditService);
 
     @Test
     void shouldCreateProductWhenSkuDoesNotExist() {
@@ -43,6 +45,7 @@ class ProductServiceTest {
         assertThat(response.getSku()).isEqualTo("MOUSE-001");
         assertThat(response.getActive()).isTrue();
         verify(productRepository).save(any(Product.class));
+        verify(auditService).record("PRODUCT_CREATED", "Product", 1L, "Produto cadastrado.");
     }
 
     @Test
@@ -56,6 +59,7 @@ class ProductServiceTest {
                 .hasMessage("Ja existe um produto cadastrado com este SKU.");
 
         verify(productRepository, never()).save(any(Product.class));
+        verify(auditService, never()).record(any(), any(), any(), any());
     }
 
     private ProductCreateRequest createRequest(String name, String sku) {

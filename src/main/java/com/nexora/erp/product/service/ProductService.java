@@ -1,5 +1,6 @@
 package com.nexora.erp.product.service;
 
+import com.nexora.erp.audit.service.AuditService;
 import com.nexora.erp.common.exception.DuplicateResourceException;
 import com.nexora.erp.common.exception.ResourceNotFoundException;
 import com.nexora.erp.product.dto.ProductCreateRequest;
@@ -18,10 +19,13 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final AuditService auditService;
 
-    public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper,
+                          AuditService auditService) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
+        this.auditService = auditService;
     }
 
     @Transactional
@@ -35,6 +39,7 @@ public class ProductService {
         request.setSku(normalizedSku);
         Product product = productMapper.toEntity(request);
         Product savedProduct = productRepository.save(product);
+        auditService.record("PRODUCT_CREATED", "Product", savedProduct.getId(), "Produto cadastrado.");
 
         return productMapper.toResponse(savedProduct);
     }
@@ -80,6 +85,7 @@ public class ProductService {
                 request.getStockQuantity(),
                 request.getMinimumStock()
         );
+        auditService.record("PRODUCT_UPDATED", "Product", product.getId(), "Produto atualizado.");
 
         return productMapper.toResponse(product);
     }
@@ -88,6 +94,7 @@ public class ProductService {
     public ProductResponse deactivate(Long id) {
         Product product = findProductById(id);
         product.deactivate();
+        auditService.record("PRODUCT_DEACTIVATED", "Product", product.getId(), "Produto inativado.");
         return productMapper.toResponse(product);
     }
 

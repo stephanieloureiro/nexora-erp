@@ -13,7 +13,7 @@ Status: MVP implementado, testado, documentado e com inicio dos diferenciais tec
 Resultado atual dos testes:
 
 ```text
-36 testes executados
+39 testes executados
 0 falhas
 ```
 
@@ -244,6 +244,7 @@ Documentos complementares:
 - [Git, GitHub e CI](docs/git-github-ci.md)
 - [Autenticacao e autorizacao](docs/authentication.md)
 - [Relatorios gerenciais](docs/reports.md)
+- [Auditoria](docs/audit.md)
 
 ## Endpoints principais
 
@@ -307,6 +308,13 @@ operador@nexora.com / nexora123
 GET    /api/reports/sales-summary
 GET    /api/reports/top-products
 GET    /api/reports/stock-summary
+```
+
+### Auditoria
+
+```text
+GET    /api/audit-events
+GET    /api/audit-events?entityType=Customer
 ```
 
 ## Regras de negocio importantes
@@ -427,6 +435,20 @@ Itens concluidos:
 - Testes de integracao criados para os relatorios.
 - Guia de relatorios criado.
 
+### Fase 9 - Auditoria
+
+Status: concluida.
+
+Itens concluidos:
+
+- Tabela `audit_events` criada.
+- Registro de eventos para clientes, produtos, estoque e pedidos.
+- Consulta administrativa de eventos criada.
+- Filtro por tipo de entidade criado.
+- Acesso restrito ao perfil `ADMIN`.
+- Testes de integracao e testes unitarios ajustados.
+- Guia de auditoria criado.
+
 ## Observacoes tecnicas
 
 - O projeto foi preparado para Git local e GitHub Actions.
@@ -434,4 +456,4 @@ Itens concluidos:
 - O profile `local` permite demonstrar a aplicacao com H2 em memoria.
 - O aviso conhecido do Mockito sobre carregamento dinamico de agente nao impacta os testes atuais.
 - Neste ambiente, o Docker ainda precisa estar instalado para validar o `docker-compose.yml` em execucao.
-- Auditoria e front-end continuam como proximos diferenciais possiveis.
+- Front-end continua como proximo diferencial possivel.

@@ -1,5 +1,6 @@
 package com.nexora.erp.customer.service;
 
+import com.nexora.erp.audit.service.AuditService;
 import com.nexora.erp.common.exception.DuplicateResourceException;
 import com.nexora.erp.customer.dto.CustomerCreateRequest;
 import com.nexora.erp.customer.dto.CustomerResponse;
@@ -21,7 +22,8 @@ class CustomerServiceTest {
 
     private final CustomerRepository customerRepository = mock(CustomerRepository.class);
     private final CustomerMapper customerMapper = new CustomerMapper();
-    private final CustomerService customerService = new CustomerService(customerRepository, customerMapper);
+    private final AuditService auditService = mock(AuditService.class);
+    private final CustomerService customerService = new CustomerService(customerRepository, customerMapper, auditService);
 
     @Test
     void shouldCreateCustomerWhenDocumentDoesNotExist() {
@@ -41,6 +43,7 @@ class CustomerServiceTest {
         assertThat(response.getDocument()).isEqualTo("12345678900");
         assertThat(response.getActive()).isTrue();
         verify(customerRepository).save(any(Customer.class));
+        verify(auditService).record("CUSTOMER_CREATED", "Customer", 1L, "Cliente cadastrado.");
     }
 
     @Test
@@ -54,6 +57,7 @@ class CustomerServiceTest {
                 .hasMessage("Ja existe um cliente cadastrado com este CPF ou CNPJ.");
 
         verify(customerRepository, never()).save(any(Customer.class));
+        verify(auditService, never()).record(any(), any(), any(), any());
     }
 
     private CustomerCreateRequest createRequest(String name, String document, String email, String phone) {

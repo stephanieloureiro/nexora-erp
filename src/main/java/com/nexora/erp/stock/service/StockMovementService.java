@@ -1,5 +1,6 @@
 package com.nexora.erp.stock.service;
 
+import com.nexora.erp.audit.service.AuditService;
 import com.nexora.erp.common.exception.ResourceNotFoundException;
 import com.nexora.erp.product.entity.Product;
 import com.nexora.erp.product.repository.ProductRepository;
@@ -20,13 +21,16 @@ public class StockMovementService {
     private final StockMovementRepository stockMovementRepository;
     private final ProductRepository productRepository;
     private final StockMovementMapper stockMovementMapper;
+    private final AuditService auditService;
 
     public StockMovementService(StockMovementRepository stockMovementRepository,
                                 ProductRepository productRepository,
-                                StockMovementMapper stockMovementMapper) {
+                                StockMovementMapper stockMovementMapper,
+                                AuditService auditService) {
         this.stockMovementRepository = stockMovementRepository;
         this.productRepository = productRepository;
         this.stockMovementMapper = stockMovementMapper;
+        this.auditService = auditService;
     }
 
     @Transactional
@@ -48,6 +52,8 @@ public class StockMovementService {
         );
 
         StockMovement savedMovement = stockMovementRepository.save(movement);
+        auditService.record("STOCK_MOVEMENT_CREATED", "StockMovement", savedMovement.getId(),
+                "Movimentacao de estoque registrada para o produto " + product.getId() + ".");
         return stockMovementMapper.toResponse(savedMovement);
     }
 

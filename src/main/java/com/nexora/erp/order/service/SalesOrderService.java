@@ -1,5 +1,6 @@
 package com.nexora.erp.order.service;
 
+import com.nexora.erp.audit.service.AuditService;
 import com.nexora.erp.common.exception.BusinessRuleException;
 import com.nexora.erp.common.exception.ResourceNotFoundException;
 import com.nexora.erp.customer.entity.Customer;
@@ -30,17 +31,20 @@ public class SalesOrderService {
     private final ProductRepository productRepository;
     private final StockMovementRepository stockMovementRepository;
     private final SalesOrderMapper salesOrderMapper;
+    private final AuditService auditService;
 
     public SalesOrderService(SalesOrderRepository salesOrderRepository,
                              CustomerRepository customerRepository,
                              ProductRepository productRepository,
                              StockMovementRepository stockMovementRepository,
-                             SalesOrderMapper salesOrderMapper) {
+                             SalesOrderMapper salesOrderMapper,
+                             AuditService auditService) {
         this.salesOrderRepository = salesOrderRepository;
         this.customerRepository = customerRepository;
         this.productRepository = productRepository;
         this.stockMovementRepository = stockMovementRepository;
         this.salesOrderMapper = salesOrderMapper;
+        this.auditService = auditService;
     }
 
     @Transactional
@@ -66,6 +70,7 @@ public class SalesOrderService {
         }
 
         SalesOrder savedOrder = salesOrderRepository.save(order);
+        auditService.record("ORDER_CREATED", "SalesOrder", savedOrder.getId(), "Pedido criado.");
         return salesOrderMapper.toResponse(savedOrder);
     }
 
@@ -100,6 +105,7 @@ public class SalesOrderService {
         }
 
         order.confirm();
+        auditService.record("ORDER_CONFIRMED", "SalesOrder", order.getId(), "Pedido confirmado.");
         return salesOrderMapper.toResponse(order);
     }
 
@@ -121,6 +127,7 @@ public class SalesOrderService {
         }
 
         order.cancel();
+        auditService.record("ORDER_CANCELED", "SalesOrder", order.getId(), "Pedido cancelado.");
         return salesOrderMapper.toResponse(order);
     }
 

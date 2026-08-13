@@ -1,5 +1,6 @@
 package com.nexora.erp.customer.service;
 
+import com.nexora.erp.audit.service.AuditService;
 import com.nexora.erp.common.exception.DuplicateResourceException;
 import com.nexora.erp.common.exception.ResourceNotFoundException;
 import com.nexora.erp.customer.dto.CustomerCreateRequest;
@@ -18,10 +19,13 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final AuditService auditService;
 
-    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
+    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper,
+                           AuditService auditService) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
+        this.auditService = auditService;
     }
 
     @Transactional
@@ -35,6 +39,7 @@ public class CustomerService {
         request.setDocument(normalizedDocument);
         Customer customer = customerMapper.toEntity(request);
         Customer savedCustomer = customerRepository.save(customer);
+        auditService.record("CUSTOMER_CREATED", "Customer", savedCustomer.getId(), "Cliente cadastrado.");
 
         return customerMapper.toResponse(savedCustomer);
     }
@@ -61,6 +66,7 @@ public class CustomerService {
     public CustomerResponse update(Long id, CustomerUpdateRequest request) {
         Customer customer = findCustomerById(id);
         customer.update(request.getName(), request.getEmail(), request.getPhone());
+        auditService.record("CUSTOMER_UPDATED", "Customer", customer.getId(), "Cliente atualizado.");
         return customerMapper.toResponse(customer);
     }
 
@@ -68,6 +74,7 @@ public class CustomerService {
     public CustomerResponse deactivate(Long id) {
         Customer customer = findCustomerById(id);
         customer.deactivate();
+        auditService.record("CUSTOMER_DEACTIVATED", "Customer", customer.getId(), "Cliente inativado.");
         return customerMapper.toResponse(customer);
     }
 
