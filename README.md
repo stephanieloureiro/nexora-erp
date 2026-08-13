@@ -485,6 +485,7 @@ Itens concluidos:
 - Consulta de auditoria para usuario administrador.
 - Teste de exposicao publica da interface criado.
 - Guia da interface web criado.
+- Dependencias runtime do Spring Security declaradas explicitamente para execucao local.
 
 ## Observacoes tecnicas
 
