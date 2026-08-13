@@ -499,6 +499,7 @@ Itens concluidos:
 - Estilos da pagina publica criados em `docs/pages.css`.
 - README atualizado para registrar a fase de publicacao.
 - GitHub Pages usado apenas para apresentacao publica, pois o Pages nao executa servidor Spring Boot nem banco de dados.
+- Teste de autenticacao ajustado para nao depender da ordem de execucao da suite no CI.
 
 ## Observacoes tecnicas
 

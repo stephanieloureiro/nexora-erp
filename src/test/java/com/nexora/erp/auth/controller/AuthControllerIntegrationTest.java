@@ -1,7 +1,5 @@
 package com.nexora.erp.auth.controller;
 
-import com.nexora.erp.product.repository.ProductRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,14 +23,6 @@ class AuthControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private ProductRepository productRepository;
-
-    @BeforeEach
-    void setUp() {
-        productRepository.deleteAll();
-    }
 
     @Test
     void shouldLoginWithValidCredentials() throws Exception {
