@@ -6,9 +6,9 @@ O projeto foi desenvolvido como portfolio para demonstrar fundamentos valorizado
 
 ## Status do projeto
 
-**Fase atual: Fase 6 - Diferenciais**
+**Fase atual: Fase 10 - Finalizacao e handoff**
 
-Status: MVP implementado, testado, documentado e com inicio dos diferenciais tecnicos.
+Status: API back-end finalizada para portfolio, com MVP, diferenciais tecnicos, testes e documentacao.
 
 Resultado atual dos testes:
 
@@ -245,6 +245,7 @@ Documentos complementares:
 - [Autenticacao e autorizacao](docs/authentication.md)
 - [Relatorios gerenciais](docs/reports.md)
 - [Auditoria](docs/audit.md)
+- [Roteiro de demonstracao](docs/demo-script.md)
 
 ## Endpoints principais
 
@@ -449,6 +450,17 @@ Itens concluidos:
 - Testes de integracao e testes unitarios ajustados.
 - Guia de auditoria criado.
 
+### Fase 10 - Finalizacao e handoff
+
+Status: concluida.
+
+Itens concluidos:
+
+- README revisado para representar o estado final do back-end.
+- Roteiro de demonstracao criado.
+- Historico de commits organizado por marcos.
+- Validacao final com testes automatizados.
+
 ## Observacoes tecnicas
 
 - O projeto foi preparado para Git local e GitHub Actions.
@@ -456,4 +468,5 @@ Itens concluidos:
 - O profile `local` permite demonstrar a aplicacao com H2 em memoria.
 - O aviso conhecido do Mockito sobre carregamento dinamico de agente nao impacta os testes atuais.
 - Neste ambiente, o Docker ainda precisa estar instalado para validar o `docker-compose.yml` em execucao.
-- Front-end continua como proximo diferencial possivel.
+- O back-end esta finalizado para portfolio.
+- Front-end continua como evolucao futura, caso o objetivo seja transformar a API em uma aplicacao visual completa.
