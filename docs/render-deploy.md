@@ -67,4 +67,5 @@ admin@nexora.com / nexora123
 - A variavel `NEXORA_JWT_SECRET` nao deve ser colocada no codigo.
 - O plano escolhido no `render.yaml` pode precisar ser ajustado no painel caso a disponibilidade do plano gratuito mude.
 - Bancos PostgreSQL gratuitos no Render expiram apos 30 dias; para manter os dados, use um plano pago.
-- O Render Blueprint atual nao aceita `runtime: java`; por isso o deploy usa `runtime: docker` com imagem Eclipse Temurin 21.
+- O Render Blueprint atual nao aceita `runtime: java`; por isso o deploy usa `runtime: docker`.
+- O build Docker usa imagem Maven com Eclipse Temurin 21 e a execucao usa Eclipse Temurin 21 JRE.
