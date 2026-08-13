@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: nexora-erp
+    runtime: java
+    plan: free
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/nexora-erp-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: NEXORA_JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nexora-erp-db
+          property: connectionString
+      - key: DATABASE_USER
+        fromDatabase:
+          name: nexora-erp-db
+          property: user
+      - key: DATABASE_PASSWORD
+        fromDatabase:
+          name: nexora-erp-db
+          property: password
+
+databases:
+  - name: nexora-erp-db
+    databaseName: nexora_erp
+    user: nexora
+    plan: free

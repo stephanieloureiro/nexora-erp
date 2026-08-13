@@ -6,9 +6,9 @@ O projeto foi desenvolvido como portfolio para demonstrar fundamentos valorizado
 
 ## Status do projeto
 
-**Fase atual: Fase 12 - Publicacao no GitHub Pages**
+**Fase atual: Fase 13 - Preparacao para deploy real**
 
-Status: sistema com back-end finalizado para portfolio, interface web operacional e pagina publica de apresentacao preparada para GitHub Pages.
+Status: sistema com back-end finalizado para portfolio, interface web operacional, pagina publica no GitHub Pages e configuracao de deploy real preparada para Render.
 
 Resultado atual dos testes:
 
@@ -244,6 +244,7 @@ http://localhost:8080/v3/api-docs
 Documentos complementares:
 
 - [Pagina publica do portfolio](docs/index.html)
+- [Deploy no Render](docs/render-deploy.md)
 - [Exemplos de requisicoes](docs/api-examples.md)
 - [Diagrama de entidades](docs/entity-diagram.md)
 - [Guia de portfolio e entrevista](docs/portfolio-guide.md)
@@ -491,7 +492,7 @@ Itens concluidos:
 
 ### Fase 12 - Publicacao no GitHub Pages
 
-Status: em validacao.
+Status: concluida.
 
 Itens concluidos:
 
@@ -500,6 +501,19 @@ Itens concluidos:
 - README atualizado para registrar a fase de publicacao.
 - GitHub Pages usado apenas para apresentacao publica, pois o Pages nao executa servidor Spring Boot nem banco de dados.
 - Teste de autenticacao ajustado para nao depender da ordem de execucao da suite no CI.
+
+### Fase 13 - Preparacao para deploy real
+
+Status: em validacao.
+
+Itens concluidos:
+
+- Profile `prod` criado para execucao em servidor publico.
+- Porta configurada por variavel de ambiente `PORT`.
+- PostgreSQL externo configurado por `DATABASE_URL`, usuario e senha via variaveis de ambiente.
+- Blueprint `render.yaml` criado para Web Service Java e PostgreSQL.
+- Chave JWT de producao configurada para ser gerada fora do codigo.
+- Guia de deploy no Render criado.
 
 ## Observacoes tecnicas
 
@@ -511,4 +525,5 @@ Itens concluidos:
 - O back-end esta finalizado para portfolio.
 - A interface web inicial foi adicionada ao proprio Spring Boot para demonstracao e uso basico do sistema.
 - A pagina do GitHub Pages e uma vitrine estatica do projeto.
+- O deploy real do ERP precisa de uma plataforma que rode Java e PostgreSQL, como Render, Railway, Fly.io ou VPS.
 - Um front-end separado continua como evolucao futura para uma experiencia visual maior e mais escalavel.
